@@ -2,185 +2,94 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
 
-export default function CenterView() {
-  
-  const [myarray, setMyarray] = useState([
-    {
-    key:0, 
-    name:'Shoaib Rana',
-    message:'Hello How are you',
-    image:'nil',
-    time:'8:45 AM',
-    unread:2
-    },
-  
-    {
-      key:1, 
-      name:'Ali',
-      message:'Where How are you',
-      image:'nil',
-      time:'8:45 AM',
-      unread:2
-      },
-  
-      {
-        key:2, 
-        name:'Amir',
-        message:'Kahaan Ho',
-        image:'nil',
-        time:'8:45 AM',
-        unread:2
-        },
-  
-        {
-          key:3, 
-          name:'Anam',
-          message:'Yes',
-          image:'nil',
-          time:'8:45 AM',
-          unread:2
+export default function CenterView(props) {
+      
+      const [data, setData] = useState(
+        [
+        {key:0,
+          title:'Amir',
+          message:'Hello',
+          unread:3,
+          time:'3:15 PM'
           },
-  
-          {
-            key:4, 
-            name:'AMina',
-            message:'I am here',
-            image:'nil',
-            time:'8:45 AM',
-            unread:2
+      
+          {key:1,
+            title:'Mustaneer',
+            message:'I am Coming',
+            unread:2,
+            time:'3:10 PM'
             },
-  
-            {
-              key:5, 
-              name:'Shahzaib',
-              message:'Main yahaan hun',
-              image:'nil',
-              time:'8:45 AM',
-              unread:2
+      
+            {key:2,
+              title:'Khalid',
+              message:'Aa raha hun',
+              unread:3,
+              time:'3:05 PM'
               },
-              {
-                key:6, 
-                name:'Shoaib Rana',
-                message:'Hello How are you',
-                image:'nil',
-                time:'8:45 AM',
-                unread:2
-                },
-              
-                {
-                  key:7, 
-                  name:'Ali',
-                  message:'Where How are you',
-                  image:'nil',
-                  time:'8:45 AM',
-                  unread:2
-                  },
-              
-                  {
-                    key:8, 
-                    name:'Amir',
-                    message:'Kahaan Ho',
-                    image:'nil',
-                    time:'8:45 AM',
-                    unread:2
-                    },
-              
-                    {
-                      key:9, 
-                      name:'Anam',
-                      message:'Yes',
-                      image:'nil',
-                      time:'8:45 AM',
-                      unread:2
-                      },
-              
-                      {
-                        key:10, 
-                        name:'AMina',
-                        message:'I am here',
-                        image:'nil',
-                        time:'8:45 AM',
-                        unread:2
-                        },
-              
-                        {
-                          key:11, 
-                          name:'Shahzaib',
-                          message:'Main yahaan hun',
-                          image:'nil',
-                          time:'8:45 AM',
-                          unread:2
-                          }
-  ])
+      ])
 
-  const myOnClick = (item) => {
-    Alert.alert('Name = '+item.name)
-  }
+      useEffect(()=>{
+        console.log('Nav', props.nav)
+      },[])
 
+      const myOwnFunction = (item)=>{
+        // Alert.alert('I am pressed', item.title)
+
+        props.nav.navigate('Profile', {name: 'Jane'})
+
+      } 
 
         return (
             <View style={styles.container}>
-                <FlatList
-                  data={myarray}
+                <Text style={{fontSize:40}}>I am center View </Text>
+
+                <FlatList 
+                  data={data}
                   keyExtractor={item=>item.key}
                   renderItem={({item})=>(
-                    
-                    <TouchableOpacity style={{
-                      marginBottom:10, 
-                      backgroundColor:'lightgrey',
-                      flex:1, 
-                      flexDirection:'row',
-                      height:60
-                      }} onPress={()=>myOnClick(item)} >
+                  
+                  <TouchableOpacity style={{backgroundColor:'lightgrey',
+                    marginBottom:10, height:70, flexDirection:'row'}}
+                    onPress={()=>myOwnFunction(item)}
+                    >
 
                       <View style={{flex:0.2}}>
-                        <Text>TASVEEER</Text>
+                        {/* Place Image Here */}
                       </View>
                       <View style={{flex:0.6}}>
-                      {/* <Text>123</Text> */}
-                        <View style={{flex:0.5}}>
-                        <Text style={{fontSize:18}}>{item.name}</Text>
+                        <View style={{flex:0.5,}}>
+                          <Text style={{fontSize:32}}>{item.title}</Text>
                         </View>
                         <View style={{flex:0.5}}>
-                        <Text>{item.message}</Text>
+                        <Text style={{fontSize:32}}>{item.message}</Text>
                         </View>
                       </View>
                       <View style={{flex:0.2}}>
 
                       <View style={{flex:0.5}}>
-                        <Text>{item.time}</Text>
-                        </View>
-                        <View style={{flex:0.5}}>
-                        <Text>{item.unread}</Text>
-                        </View>
+                      <Text style={{fontSize:26}}>{item.time}</Text>
+                      </View>
+                      <View style={{flex:0.5}}>
+                      <Text style={{fontSize:32}}>{item.unread}</Text>
+                      </View>
 
                       </View>
 
+                      
                      
                     </TouchableOpacity>
 
+
                   )}
-
-                  // data={dummyArray}
-                  // keyExtractor={item=>item.key}
-                  // renderItem={({item})=>(
-                  //   <View> 
-                  //     <Text>
-                  //       {item.title}
-                  //     </Text>
-                  //   </View>
-                  // )}
                 />
-
-
             </View>
           );
     }
   
 const styles = StyleSheet.create({
   container: {
-    flex: 0.80,
-    // backgroundColor: 'grey',
+    flex: 1,
+    backgroundColor: 'green',
     // alignItems: 'center',
     // justifyContent: 'center',
   },

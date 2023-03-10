@@ -1,41 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import TopView from './TopView';
-import CenterView from './CenterView';
-import BottomView from './BottomView';
+import HomeScreen from './Home';
+import SettingScreen from './Setting';
+import OneMoreScreen from './OneMoreScreen';
 
-// State and Props 
-// useEffect
+const Stack = createNativeStackNavigator();
 
-// var flag = 100;
-
-export default function App() {
-  
-  // flag = 100000;
-  const [count, setCount] = useState(16)
-  console.log('Top Space');
-  useEffect(()=>{
-    console.log('I am useEffect Function')
-    setCount(56)
-  },[])
-
+export default function App(){
   return (
-    <View style={styles.container}>
-     <TopView backbutton={false}  />
-     <CenterView />
-     <BottomView />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+       
+
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="OneMoreScreen" component={OneMoreScreen} options={{ headerShown: false }} />
+
+
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
+};
 
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
-});
+
+
+
+{/* <Stack.Screen
+name="Home"
+component={HomeScreen}
+options={{title: 'Welcome'}}
+/> */}
